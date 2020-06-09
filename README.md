@@ -39,7 +39,7 @@ FINDINGS:
    An employee needs a forename, middlename and surname and with the current form that is not possible.
    Instead, it should be:
 
-<%= form.label :forename %> <%= form.text_field :forename, class:
+`<%= form.label :forename %> <%= form.text_field :forename, class:
 "form-control" %>
 
  <p>
@@ -49,26 +49,26 @@ FINDINGS:
  <p>
    <%= form.label :surname %> <%= form.text_field :surname, class:
    "form-control" %>
- </p>
+ </p>`
 
 2. Create a new company
    The create functionality works but it redirects to a different company show page upon creation. This is true for all companies→ the show page is always for Mickeys plaice.
    First I had a look at the show page and then realised that the error was in the company controller. In the show method, it is written that the company is always the first company.
    Instead, it should be:
 
-def show
+`def show
 @company = Company.find(permitted_params[:id])
 
 # @company = Company.first
 
-end
+end`
 
 3. Edit employees not working on the company show page
    When you click edit, the wrong URL was being made. The company id was the employee id and the employee id was the company id.
    I went to the company show page and saw that @company was not being given to the edit_company_employee_path.
    The code should look like this instead in app/views/companies/show.erb:
 
-<td>
+`<td>
      <%= link_to "Edit", edit_company_employee_path(@company, employee ),
        class: "btn btn-primary btn-sm" %>
-</td>
+</td>`
